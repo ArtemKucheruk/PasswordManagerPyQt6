@@ -6,5 +6,5 @@ second for saving passwords, that you add there
 
 Install and open with app, where you're working with code.
 Write :
-pip install Django
+pip install PyQt6
 and it will work
