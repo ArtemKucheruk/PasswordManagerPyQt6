@@ -7,6 +7,6 @@ second for saving passwords, that you add there
 Install and open with app, where you're working with code.
 Write :
 pip install PyQt6 in your terminal
-and it will work
-write in terminal
-python Reg.py or start the app from the Reg.py file
+and it will work.
+Write in terminal
+"python Reg.py" or start the app from the Reg.py file
