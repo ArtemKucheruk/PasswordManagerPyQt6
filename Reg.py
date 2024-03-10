@@ -14,13 +14,11 @@ class Interface(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setStyleSheet('background-color: darkgrey;')
 
         self.ui.pushButton.clicked.connect(self.auth)
-        self.ui.pushButton.setStyleSheet("background-color: black;"
-                                            "border: 2px solid black;"
+        self.ui.pushButton.setStyleSheet("border: 2px solid black;"
                                             "border-radius: 5px;"
                                             "padding: 5px;")
         self.ui.pushButton_2.clicked.connect(self.reg)
-        self.ui.pushButton_2.setStyleSheet("background-color: black;"
-                                         "border: 2px solid black;"
+        self.ui.pushButton_2.setStyleSheet("border: 2px solid black;"
                                          "border-radius: 5px;"
                                          "padding: 5px;")
 
@@ -42,7 +40,6 @@ class Interface(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def signal_handler(self, value):
         if value == "Login success":
-            # Open the second window when login is successful
             self.open_second_window()
         else:
             QtWidgets.QMessageBox.about(self, "Оповищение", value)

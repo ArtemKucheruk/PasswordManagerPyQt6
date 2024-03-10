@@ -9,7 +9,7 @@ def create_users_table():
         password TEXT NOT NULL
     );
     '''
-    conn = sqlite3.connect('handler/users.db')  # Provide the full path to your database file
+    conn = sqlite3.connect('handler/users.db')  
     cur = conn.cursor()
     cur.execute(CREATE_TABLE_QUERY)
     conn.commit()
@@ -17,7 +17,7 @@ def create_users_table():
 
 def login(login, passw, signal):
     try:
-        con = sqlite3.connect('handler/Users.db')  # Provide the full path to your database file
+        con = sqlite3.connect('handler/Users.db')  
         cur = con.cursor()
 
         cur.execute('SELECT * FROM users WHERE name=? AND password=?;', (login, passw))
@@ -35,16 +35,16 @@ def login(login, passw, signal):
 
 def reg(name, password, signal):
     try:
-        con = sqlite3.connect('handler/users.db')  # Provide the full path to your database file
+        con = sqlite3.connect('handler/users.db')  
         cur = con.cursor()
 
-        # Check if the username already exists
+       
         cur.execute('SELECT * FROM users WHERE name=?;', (name,))
         if cur.fetchone() is not None:
             signal.emit("Username already exists. Please choose a different one.")
             return
 
-        # Insert the new user
+       
         cur.execute('INSERT INTO users (name, password) VALUES (?, ?);', (name, password))
         con.commit()
         signal.emit("Registration success")
@@ -54,5 +54,4 @@ def reg(name, password, signal):
     finally:
         con.close()
 
-# Call the create_users_table function to ensure the users table exists
 create_users_table()
