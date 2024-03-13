@@ -62,8 +62,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
 
 
 
-        #КНОПКИ В САЙДБАР НО НЕ КНОПКИ
-
         self.menu_list =[
             {
                 "name": "Home",
@@ -103,15 +101,12 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
 
 
 
-
-#ПОДКЛЮЧЕНИЕ СИГНАЛОВ ДЛЯ САЙДБАРА
     def init_signal_slot(self):
         self.menu_btn.toggled.connect(self.side_menu.setHidden)
         self.menu_btn.toggled.connect(self.title_label.setHidden)
         self.menu_btn.toggled.connect(self.title_icon.setHidden)
         self.menu_btn.toggled.connect(self.side_menu_icon_only.setVisible)
 
-        # ПОДКЛЮЧЕНИЕ СИГНАЛОВ ДЛЯ САЙДБАРА ДЛЯ АЙТЕМОВ В НЕМ
         self.side_menu.currentRowChanged['int'].connect(self.main_content.setCurrentIndex)
         self.side_menu_icon_only.currentRowChanged['int'].connect(self.main_content.setCurrentIndex)
         self.side_menu.currentRowChanged['int'].connect(self.side_menu_icon_only.setCurrentRow)
@@ -120,7 +115,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
         self.menu_btn.toggled.connect(self.button_icon_changed)
 
 
-    # МЕНЯЕТЬСЯ ЗНАЧОК САЙДБАРА
     def button_icon_changed(self, status):
         if status:
             self.menu_btn.setIcon(QIcon("MainWindow/openfolderwithfile_122800.svg"))
@@ -128,13 +122,11 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
             self.menu_btn.setIcon(QIcon("MainWindow/4115230-cancel-close-cross-delete_114048.svg"))
 
 
-    #НАЧАЛО САЙДБАРА(Я ЕГО НЕ НАВИЖУ)
     def init_list_widget(self):
         self.side_menu.clear()
         self.side_menu_icon_only.clear()
 
-
-        # НАСТРОЙКА ИКОНОК ДЛЯ САЙДБАРА(Я ЕГО НЕ НАВИЖУ)
+        
         for menu in self.menu_list:
             item = QListWidgetItem()
             item.setIcon(QIcon(menu.get("icon")))
@@ -150,7 +142,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
             self.side_menu.setCurrentRow(0)
 
 
-    #ФИГНЯ ДЛЯ ПЕРЕКЛЮЧЕНИЙ СТРАНИЦ
     def init_stackwidget(self):
         widget_list = self.main_content.findChildren(QWidget)
         for widget in widget_list:
@@ -159,8 +150,7 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
         for menu in self.menu_list:
             text = menu.get("name")
             layout = QGridLayout()
-
-            # Add a label to the layout
+            
             label = QLabel(text=text)
             font = QFont()
             font.setPixelSize(20)
@@ -168,7 +158,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
             layout.addWidget(label, 0, 0, 0, 0)
 
 
-            # ПЕРЕКЛЮЧЕНИЕ НА СТРАНИЦУ С ВИХОДОМ
             if text == "Exit":
                 exit_button = QPushButton("Exit")
                 label.setStyleSheet("font-size: 20px;"
@@ -185,7 +174,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
 
 
 
-            # ПЕРЕКЛЮЧЕНИЕ НА СТРАНИЦУ С ГНЕРАТОРОМ ПАРОЛЕЙ(НЕ РОБОТАЕТ) ПОТОМ
             if text == "Generator Passwords":
                 label.setStyleSheet("font-size: 20px;"
                                     "font-weight: bold;")
@@ -235,10 +223,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
 
 
 
-
-
-
-            # ПЕРЕКЛЮЧЕНИЕ НА СТРАНИЦУ С РЕПОРТАМИ
             if text == "Reports":
                 label.setText("Write your report")
                 label.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -259,7 +243,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
                 layout.addWidget(btn_send, 2,0)
 
 
-            # ПЕРЕКЛЮЧЕНИЕ НА СТРАНИЦУ ДЛЯ ЗАПИСИ НОВИХ ПАРОЛЕЙ
 
             if text == "New Password":
                 label.setText("Form \n to make new password")
@@ -345,7 +328,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
 
 
 
-# ПЕРЕКЛЮЧЕНИЕ НА СТРАНИЦУ СО СПИСКОМ ПАРОЛЕЙ
             if text == "Passwords":
                 cursor.execute("SELECT * FROM db_for_passwords")
                 data = cursor.fetchall()
@@ -411,7 +393,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
             self.generated_password_output.setText(password)
 
 
-          ####################
     def check_input_second(funct):
         def wrapper(self):
             for line_edit in self.base_line_edit_second:
@@ -436,15 +417,11 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
         self.info_box.setText('')
 
     def update_table(self):
-        # Clear existing rows in the table
         self.tableWidget.setRowCount(0)
 
-        # Assuming 'data' and 'cursor' are defined elsewhere in your code
-        # Replace 'data' and 'cursor' with your actual data and cursor objects
         cursor.execute("SELECT * FROM db_for_passwords")
         data = cursor.fetchall()
 
-        # Update the table with new data
         for row_num, row_data in enumerate(data):
             self.tableWidget.insertRow(row_num)
             for col_num, col_data in enumerate(row_data):
@@ -454,8 +431,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
 
 
 
-
-# ФУНК К БАТОНУ С РЕПОРТАМИ
     def send_report(self):
         dlg = QMessageBox(self)
         dlg.setWindowTitle("Report")
@@ -468,8 +443,6 @@ class MainWindowPasswords(QMainWindow, Ui_MainWindow_2):
             pass
 
 
-
-    # ФУНК ДЛЯ КНОПКИ ВИХОДА
     def exit_func(self):
         dlg = QMessageBox(self)
         dlg.setWindowTitle("Exit")
