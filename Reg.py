@@ -42,7 +42,6 @@ class Interface(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def signal_handler(self, value):
         if value == "Login success":
-            # Open the second window when login is successful
             self.open_second_window()
         else:
             QtWidgets.QMessageBox.about(self, "Оповищение", value)
